@@ -1,0 +1,43 @@
+# CLAUDE.md — mini hotel PMS demo
+
+## What this repo is
+A small multi-property hotel PMS backend, used for a training demo. It
+manages properties, reservations and folio entries (charges and payments)
+for guests across two properties. Property isolation and paisa-accurate
+money handling are the two things that matter most here.
+
+## Run it
+No install needed — Python 3 standard library only.
+
+Run the tests (from this directory):
+```
+python3 -m unittest discover -s tests -v
+```
+
+Try it by hand:
+```
+python3 -c "from app.db import init_db; from app.reservations import get_reservation; init_db(); print(get_reservation('PROP-A', 'RES-1001'))"
+```
+
+## The rules that are not negotiable
+- Every query that touches reservation or folio data **must** filter by
+  `property_id`. A caller scoped to one property must never see another
+  property's data — not even the fact that a reservation id exists.
+- Money is `Decimal`, built from the stored string. Never `float`. The
+  stored amounts (`reservations.nightly_rate`, `folio_entries.amount`) are
+  paisa-accurate strings for exactly this reason.
+- Never log guest name, email, phone or card data. Log through
+  `app/log.py`'s `get_logger`, and log identifiers only —
+  `property_id`, `reservation_id`.
+- A missing or out-of-scope record raises `NotFoundError` (`app/errors.py`).
+  Never let it fall through as an unhandled exception — that becomes a 500
+  where it should be a 404.
+- Every new public function ships with a unittest, covering the missing/
+  cross-property case, not just the happy path.
+
+## How we write things here
+- Follow the pattern in `app/reservations.py::get_reservation`: SQL filters
+  by `property_id` AND the record id together, raise `NotFoundError` on no
+  match, convert money columns to `Decimal` before returning, log through
+  the house logger.
+- Tests live in `tests/`, one file per module, run with `unittest`.

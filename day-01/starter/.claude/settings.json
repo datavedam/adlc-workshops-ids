@@ -1,0 +1,31 @@
+{
+  "_comment": "Day 1 starter. Commit this to the repo so the whole team inherits it, rather than fifteen people configuring fifteen laptops differently.",
+  "permissions": {
+    "defaultMode": "acceptEdits",
+    "additionalDirectories": [],
+    "deny": [
+      "Bash(curl:*)",
+      "Bash(wget:*)",
+      "Bash(nc:*)",
+      "Bash(ssh:*)",
+      "Bash(sudo:*)",
+      "Bash(rm -rf:*)",
+      "Bash(git push --force:*)",
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./secrets/**)",
+      "Read(~/.aws/**)",
+      "Read(~/.ssh/**)",
+      "Edit(./.env)",
+      "Edit(./.github/workflows/**)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [{ "type": "command", "command": ".claude/guard.sh" }]
+      }
+    ]
+  }
+}
