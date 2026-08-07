@@ -15,6 +15,9 @@ cd /tmp/adlc-demo
 python3 -m unittest discover -s tests    # must end with OK
 ```
 
+Prefer to let Claude Code do the setup for you? Paste the prompt in
+**[day-01/SETUP-PROMPT.md](day-01/SETUP-PROMPT.md)**.
+
 Then read **[day-01/PARTICIPANT.md](day-01/PARTICIPANT.md)**. It explains the
 whole day and every command you will run.
 
