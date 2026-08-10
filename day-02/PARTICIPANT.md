@@ -21,6 +21,10 @@ If that prints a report, you are ready. You also need the **BRD** — the traine
 gives you that file directly. It is confidential and it is not in this
 repository.
 
+Prefer to let Claude Code do the setup for you? Paste the prompt in
+**[SETUP-PROMPT.md](SETUP-PROMPT.md)**. It does the plumbing and refuses the
+five things that are yours to do.
+
 ---
 
 ## The four parts
