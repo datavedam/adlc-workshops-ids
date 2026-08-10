@@ -1,0 +1,2 @@
+Copy the starter folder in here, one per module you own:
+    cp -r ../starter fnb

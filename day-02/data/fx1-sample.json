@@ -1,0 +1,855 @@
+{
+  "_readme": "FX1 sample data, transcribed from the BRD (07 Aug 2026), Property 5768, 95 keys, MTD = 4 trading days to 04 Aug 2026. The conflicts in the BRD are PRESERVED here on purpose. Do not fix them in this file. Find them, decide them, and record the decision in your CONFLICTS.md.",
+  "property": {
+    "name": "The Resort, Mumbai",
+    "code": "5768",
+    "keys": 95,
+    "mtd_days": 4
+  },
+  "modules": {
+    "overview": {
+      "title": "Executive Overview",
+      "kpis": {
+        "occupancy": {
+          "value": 53.4,
+          "unit": "%",
+          "note": "20 Standard keys are out of order for renovation, capping the ceiling near 79%. On sellable inventory occupancy is 67%."
+        },
+        "adr": {
+          "value": 9010,
+          "unit": "INR"
+        },
+        "revpar": {
+          "value": 4811,
+          "unit": "INR",
+          "derived": "rooms_revenue / available_room_nights"
+        },
+        "trevpar": {
+          "value": 7980,
+          "unit": "INR",
+          "derived": "total_revenue / available_room_nights"
+        },
+        "goppar": {
+          "value": 3290,
+          "unit": "INR",
+          "derived": "gop / available_room_nights"
+        },
+        "total_revenue": {
+          "value": 30.3,
+          "unit": "INR_LAKH"
+        },
+        "gop_margin": {
+          "value": 42.1,
+          "unit": "%"
+        },
+        "flow_through": {
+          "value": 56,
+          "unit": "%"
+        }
+      },
+      "tables": {
+        "consolidated_pl": {
+          "title": "Consolidated P&L (INR Lakh, MTD)",
+          "basis": "MTD",
+          "rows": [
+            {
+              "line": "Rooms",
+              "value": 18.4,
+              "kind": "revenue"
+            },
+            {
+              "line": "Food & Beverage",
+              "value": 7.3,
+              "kind": "revenue"
+            },
+            {
+              "line": "Banquets / MICE",
+              "value": 2.1,
+              "kind": "revenue"
+            },
+            {
+              "line": "Spa & Wellness",
+              "value": 1.2,
+              "kind": "revenue"
+            },
+            {
+              "line": "Other / ancillary",
+              "value": 1.3,
+              "kind": "revenue"
+            },
+            {
+              "line": "Cost of sales",
+              "value": -2.4,
+              "kind": "cost"
+            },
+            {
+              "line": "Departmental payroll",
+              "value": -4.2,
+              "kind": "cost"
+            },
+            {
+              "line": "Departmental expenses",
+              "value": -1.2,
+              "kind": "cost"
+            },
+            {
+              "line": "Undistributed",
+              "value": -9.7,
+              "kind": "cost"
+            }
+          ],
+          "stated_total_revenue": 30.3,
+          "stated_total_cost": -17.5,
+          "stated_gop": 12.8,
+          "stated_trevpar": 7974,
+          "stated_revpar": 4842,
+          "stated_goppar": 3358,
+          "source": "BRD p.10"
+        },
+        "revenue_mix_ytd": {
+          "title": "Revenue Mix (YTD)",
+          "rows": [
+            {
+              "line": "Rooms",
+              "share": 60.8,
+              "value": 104.8
+            },
+            {
+              "line": "F&B",
+              "share": 24.1,
+              "value": 41.5
+            },
+            {
+              "line": "Banquets / MICE",
+              "share": 6.9,
+              "value": 11.9
+            },
+            {
+              "line": "Spa & Wellness",
+              "share": 4.0,
+              "value": 6.9
+            },
+            {
+              "line": "Other",
+              "share": 4.2,
+              "value": 7.2
+            }
+          ],
+          "stated_total_share": 100.0
+        },
+        "booking_pace": {
+          "title": "Booking Pace — On the Books",
+          "rows": [
+            {
+              "month": "Aug",
+              "otb": 1520,
+              "ly": 1410
+            },
+            {
+              "month": "Sep",
+              "otb": 1180,
+              "ly": 1090
+            },
+            {
+              "month": "Oct",
+              "otb": 1360,
+              "ly": 1240
+            },
+            {
+              "month": "Nov",
+              "otb": 1490,
+              "ly": 1350
+            },
+            {
+              "month": "Dec",
+              "otb": 1720,
+              "ly": 1560
+            },
+            {
+              "month": "Jan",
+              "otb": 860,
+              "ly": 720
+            }
+          ]
+        },
+        "trevpar_composition": {
+          "title": "TRevPAR Composition (INR per available room)",
+          "rows": [
+            {
+              "month": "Aug",
+              "rooms": 4811,
+              "fnb": 1924,
+              "mice": 551,
+              "spa": 319,
+              "other": 375
+            }
+          ],
+          "stated_total": 7980
+        }
+      }
+    },
+    "front_office": {
+      "title": "Front Office",
+      "kpis": {
+        "rooms_sold": {
+          "value": 49,
+          "benchmark": "Budget 52 · Sellable 75"
+        },
+        "arrivals": {
+          "value": 20
+        },
+        "departures": {
+          "value": 18
+        },
+        "in_house": {
+          "value": 49
+        },
+        "alos": {
+          "value": 2.3,
+          "unit": "nights"
+        },
+        "upsell_revenue": {
+          "value": 1.42,
+          "unit": "INR_LAKH"
+        }
+      },
+      "tables": {
+        "room_status": {
+          "title": "Room Status",
+          "rows": [
+            {
+              "status": "Occupied",
+              "rooms": 49,
+              "share": 51.6
+            },
+            {
+              "status": "Vacant - ready",
+              "rooms": 3,
+              "share": 3.2
+            },
+            {
+              "status": "Vacant - dirty",
+              "rooms": 0,
+              "share": 0
+            },
+            {
+              "status": "Out of order (renovation)",
+              "rooms": 43,
+              "share": 45.3
+            },
+            {
+              "status": "Comp / house",
+              "rooms": 0,
+              "share": 0
+            }
+          ],
+          "stated_total_rooms": 95,
+          "source": "BRD p.16"
+        }
+      }
+    },
+    "fnb": {
+      "title": "Food & Beverage / POS",
+      "kpis": {
+        "fnb_revenue": {
+          "value": 21.3,
+          "unit": "INR_LAKH"
+        },
+        "covers": {
+          "value": 2164
+        },
+        "average_check": {
+          "value": 984,
+          "unit": "INR",
+          "derived": "fnb_revenue / covers"
+        },
+        "revpash": {
+          "value": 412,
+          "unit": "INR"
+        },
+        "food_cost": {
+          "value": 29.4,
+          "unit": "%"
+        },
+        "beverage_cost": {
+          "value": 26.4,
+          "unit": "%"
+        }
+      },
+      "tables": {
+        "revenue_by_outlet": {
+          "title": "Revenue by Outlet (MTD)",
+          "rows": [
+            {
+              "outlet": "Spice Route",
+              "revenue": 12.4,
+              "covers": 1050
+            },
+            {
+              "outlet": "Banquets",
+              "revenue": 9.1,
+              "covers": 680
+            },
+            {
+              "outlet": "Azure Bar",
+              "revenue": 6.9,
+              "covers": 515
+            },
+            {
+              "outlet": "Cafe Deli",
+              "revenue": 4.6,
+              "covers": 820
+            },
+            {
+              "outlet": "In-room dining",
+              "revenue": 3.4,
+              "covers": 405
+            },
+            {
+              "outlet": "Pool bar",
+              "revenue": 1.9,
+              "covers": 245
+            }
+          ],
+          "source": "BRD p.18"
+        },
+        "revenue_by_daypart": {
+          "title": "Revenue by Daypart",
+          "rows": [
+            {
+              "daypart": "Breakfast",
+              "revenue": 4.2,
+              "covers": 380
+            },
+            {
+              "daypart": "Lunch",
+              "revenue": 5.1,
+              "covers": 290
+            },
+            {
+              "daypart": "Hi-tea",
+              "revenue": 1.8,
+              "covers": 140
+            },
+            {
+              "daypart": "Dinner",
+              "revenue": 9.8,
+              "covers": 410
+            },
+            {
+              "daypart": "Late night",
+              "revenue": 1.2,
+              "covers": 60
+            }
+          ],
+          "source": "BRD p.19"
+        }
+      }
+    },
+    "sales_catering": {
+      "title": "Sales & Catering",
+      "kpis": {
+        "banquet_revenue": {
+          "value": 48.6,
+          "unit": "INR_LAKH"
+        },
+        "confirmed_events": {
+          "value": 23,
+          "note": "14 confirmed future events give visibility.",
+          "benchmark": "Pipeline 41"
+        },
+        "pipeline_value": {
+          "value": 184,
+          "unit": "INR_LAKH",
+          "benchmark": "Weighted 96"
+        },
+        "conversion": {
+          "value": 34,
+          "unit": "%"
+        },
+        "avg_event_value": {
+          "value": 2.1,
+          "unit": "INR_LAKH"
+        }
+      },
+      "tables": {
+        "event_type": {
+          "title": "Revenue by Event Type",
+          "rows": [
+            {
+              "type": "Weddings",
+              "share": 38,
+              "revenue": 18.5
+            },
+            {
+              "type": "Corporate / MICE",
+              "share": 31,
+              "revenue": 15.1
+            },
+            {
+              "type": "Social",
+              "share": 18,
+              "revenue": 8.7
+            },
+            {
+              "type": "Exhibitions",
+              "share": 8,
+              "revenue": 3.9
+            },
+            {
+              "type": "Others",
+              "share": 5,
+              "revenue": 2.4
+            }
+          ],
+          "stated_total_revenue": 48.6
+        },
+        "pipeline_funnel": {
+          "title": "Event Pipeline Funnel",
+          "rows": [
+            {
+              "stage": "Enquiries",
+              "value": 512,
+              "prob": 10,
+              "weighted": 51.2
+            },
+            {
+              "stage": "Qualified",
+              "value": 348,
+              "prob": 25,
+              "weighted": 87.0
+            },
+            {
+              "stage": "Tentative",
+              "value": 184,
+              "prob": 45,
+              "weighted": 82.8
+            },
+            {
+              "stage": "Confirmed",
+              "value": 132,
+              "prob": 95,
+              "weighted": 125.4
+            },
+            {
+              "stage": "Delivered",
+              "value": 98,
+              "prob": 100,
+              "weighted": 98.0
+            }
+          ],
+          "stated_weighted_pipeline": 96
+        }
+      }
+    },
+    "spa": {
+      "title": "Spa & Wellness",
+      "kpis": {
+        "spa_revenue": {
+          "value": 14.1,
+          "unit": "INR_LAKH",
+          "note": "Retail is only 7% of the mix vs a 12-15% benchmark."
+        },
+        "treatments": {
+          "value": 412,
+          "benchmark": "Capacity 580"
+        },
+        "therapist_util": {
+          "value": 71,
+          "unit": "%"
+        },
+        "avg_treatment_value": {
+          "value": 3240,
+          "unit": "INR"
+        },
+        "retail_sales": {
+          "value": 2.58,
+          "unit": "INR_LAKH"
+        },
+        "retail_attach": {
+          "value": 19,
+          "unit": "%"
+        }
+      },
+      "tables": {
+        "treatment_mix": {
+          "title": "Treatment Mix",
+          "rows": [
+            {
+              "category": "Massage & body",
+              "share": 42,
+              "bookings": 173
+            },
+            {
+              "category": "Facials",
+              "share": 24,
+              "bookings": 99
+            },
+            {
+              "category": "Ayurveda",
+              "share": 18,
+              "bookings": 74
+            },
+            {
+              "category": "Salon",
+              "share": 10,
+              "bookings": 41
+            },
+            {
+              "category": "Wellness / yoga",
+              "share": 6,
+              "bookings": 25
+            }
+          ],
+          "stated_total_bookings": 412
+        },
+        "demand_by_hour": {
+          "title": "Demand by Hour",
+          "rows": [
+            {
+              "window": "Morning 9-12",
+              "treatments": 41
+            },
+            {
+              "window": "Midday 12-15",
+              "treatments": 36
+            },
+            {
+              "window": "Peak 16-19",
+              "treatments": 85
+            },
+            {
+              "window": "Evening 19-21",
+              "treatments": 27
+            }
+          ],
+          "stated_total_treatments": 412
+        },
+        "services_vs_retail": {
+          "title": "Revenue Split — Services vs Retail",
+          "rows": [
+            {
+              "month": "Aug",
+              "services": 11.5,
+              "retail": 2.6,
+              "retail_pct": 18
+            }
+          ],
+          "stated_total": 14.1,
+          "source": "BRD p.25"
+        }
+      }
+    },
+    "finance": {
+      "title": "Finance",
+      "kpis": {
+        "total_revenue": {
+          "value": 303.0,
+          "unit": "INR_LAKH",
+          "basis_stated": "MTD",
+          "benchmark": "Budget 289"
+        },
+        "gop": {
+          "value": 127.6,
+          "unit": "INR_LAKH",
+          "basis_stated": "MTD",
+          "benchmark": "Budget 118"
+        },
+        "gop_margin": {
+          "value": 42.1,
+          "unit": "%"
+        },
+        "goppar": {
+          "value": 3290,
+          "unit": "INR"
+        },
+        "cpor": {
+          "value": 2140,
+          "unit": "INR"
+        },
+        "payroll_pct": {
+          "value": 28.4,
+          "unit": "%"
+        }
+      },
+      "tables": {
+        "usali_bridge": {
+          "title": "Revenue to GOP Bridge (USALI, MTD)",
+          "rows": [
+            {
+              "line": "Total revenue",
+              "value": 303.0,
+              "pct": 100
+            },
+            {
+              "line": "Cost of sales",
+              "value": -24.2,
+              "pct": 8.0
+            },
+            {
+              "line": "Departmental payroll",
+              "value": -42.0,
+              "pct": 13.9
+            },
+            {
+              "line": "Departmental expenses",
+              "value": -12.1,
+              "pct": 4.0
+            },
+            {
+              "line": "Undistributed expenses",
+              "value": -97.1,
+              "pct": 32.0
+            }
+          ],
+          "stated_gop": 127.6,
+          "source": "BRD p.31"
+        },
+        "cost_structure": {
+          "title": "Cost Structure",
+          "rows": [
+            {
+              "line": "Payroll",
+              "pct": 28.4,
+              "value": 86.1
+            },
+            {
+              "line": "Cost of sales",
+              "pct": 18.6,
+              "value": 56.4
+            },
+            {
+              "line": "Utilities",
+              "pct": 12.1,
+              "value": 36.7
+            },
+            {
+              "line": "Sales & marketing",
+              "pct": 11.4,
+              "value": 34.5
+            },
+            {
+              "line": "Admin & general",
+              "pct": 9.8,
+              "value": 29.7
+            },
+            {
+              "line": "Maintenance",
+              "pct": 6.2,
+              "value": 18.8
+            },
+            {
+              "line": "Other",
+              "pct": 13.5,
+              "value": 40.9
+            }
+          ],
+          "stated_total_cost": 175.4,
+          "source": "BRD p.32"
+        }
+      }
+    },
+    "signals": {
+      "title": "Strategic Signals",
+      "kpis": {
+        "pickup_7day": {
+          "value": 214,
+          "unit": "room_nights"
+        },
+        "booking_window": {
+          "value": 18.4,
+          "unit": "days"
+        },
+        "forecast_accuracy": {
+          "value": 94.2,
+          "unit": "%"
+        },
+        "denials": {
+          "value": 6.8,
+          "unit": "INR_LAKH"
+        },
+        "flow_through": {
+          "value": 56,
+          "unit": "%"
+        },
+        "direct_ratio": {
+          "value": 39,
+          "unit": "%"
+        },
+        "staff_turnover": {
+          "value": 34,
+          "unit": "%"
+        }
+      },
+      "tables": {
+        "otb_vs_forecast": {
+          "title": "On the Books vs Forecast vs Budget",
+          "rows": [
+            {
+              "week": 1,
+              "otb": 520,
+              "forecast": 548,
+              "budget": 560
+            },
+            {
+              "week": 2,
+              "otb": 486,
+              "forecast": 510,
+              "budget": 520
+            },
+            {
+              "week": 3,
+              "otb": 558,
+              "forecast": 572,
+              "budget": 560
+            },
+            {
+              "week": 4,
+              "otb": 610,
+              "forecast": 615,
+              "budget": 600
+            },
+            {
+              "week": 5,
+              "otb": 472,
+              "forecast": 505,
+              "budget": 520
+            },
+            {
+              "week": 6,
+              "otb": 540,
+              "forecast": 560,
+              "budget": 550
+            },
+            {
+              "week": 7,
+              "otb": 595,
+              "forecast": 600,
+              "budget": 580
+            },
+            {
+              "week": 8,
+              "otb": 430,
+              "forecast": 470,
+              "budget": 500
+            }
+          ]
+        },
+        "booking_pace_month": {
+          "title": "Booking Pace & Pickup (this month)",
+          "rows": [
+            {
+              "checkpoint": "Day 7",
+              "otb": 480,
+              "ly": 432
+            },
+            {
+              "checkpoint": "Day 14",
+              "otb": 992,
+              "ly": 894
+            },
+            {
+              "checkpoint": "Day 21",
+              "otb": 1524,
+              "ly": 1374
+            },
+            {
+              "checkpoint": "Day 30",
+              "otb": 2198,
+              "ly": 1983
+            }
+          ]
+        }
+      }
+    }
+  },
+  "cross_refs": [
+    {
+      "id": "XR-1",
+      "what": "Rooms out of order",
+      "a": "overview.kpis.occupancy.note (states 20)",
+      "b": "front_office.tables.room_status (states 43)",
+      "source": {
+        "a": "BRD p.8 · Executive Overview, Occupancy KPI description",
+        "b": "BRD p.16 · Front Office, Room Status table"
+      }
+    },
+    {
+      "id": "XR-2",
+      "what": "Food & Beverage revenue, same month",
+      "a": "overview.tables.consolidated_pl (7.3)",
+      "b": "fnb.kpis.fnb_revenue (21.3)",
+      "c": "fnb.tables.revenue_by_outlet (sum)",
+      "d": "fnb.tables.revenue_by_daypart (sum)",
+      "source": {
+        "a": "BRD p.10 · Consolidated P&L",
+        "b": "BRD p.17 · F&B KPI specification",
+        "c": "BRD p.18 · Revenue by Outlet",
+        "d": "BRD p.19 · Revenue by Daypart"
+      }
+    },
+    {
+      "id": "XR-3",
+      "what": "Covers, same month",
+      "a": "fnb.kpis.covers (2164)",
+      "b": "fnb.tables.revenue_by_outlet (sum of covers)",
+      "c": "fnb.tables.revenue_by_daypart (sum of covers)",
+      "source": {
+        "a": "BRD p.17 · F&B KPI specification",
+        "b": "BRD p.18 · Revenue by Outlet",
+        "c": "BRD p.19 · Revenue by Daypart"
+      }
+    },
+    {
+      "id": "XR-4",
+      "what": "Total revenue, same basis label",
+      "a": "overview.tables.consolidated_pl.stated_total_revenue (30.3)",
+      "b": "finance.kpis.total_revenue (303.0)",
+      "source": {
+        "a": "BRD p.10 · Consolidated P&L",
+        "b": "BRD p.30 · Finance KPI specification"
+      }
+    },
+    {
+      "id": "XR-5",
+      "what": "Cost of sales as a share of revenue",
+      "a": "finance.tables.usali_bridge (8.0%)",
+      "b": "finance.tables.cost_structure (18.6%)",
+      "source": {
+        "a": "BRD p.31 · Revenue to GOP Bridge (USALI)",
+        "b": "BRD p.32 · Cost Structure"
+      }
+    },
+    {
+      "id": "XR-6",
+      "what": "Banquet revenue, same month",
+      "a": "overview.tables.consolidated_pl Banquets/MICE (2.1)",
+      "b": "sales_catering.kpis.banquet_revenue (48.6)",
+      "source": {
+        "a": "BRD p.10 · Consolidated P&L",
+        "b": "BRD p.20 · Sales & Catering KPI specification"
+      }
+    },
+    {
+      "id": "XR-7",
+      "what": "Spa retail as a share of spa revenue",
+      "a": "spa.kpis.spa_revenue.note (7%)",
+      "b": "spa.tables.services_vs_retail (18%)",
+      "source": {
+        "a": "BRD p.23 · Spa Revenue KPI description",
+        "b": "BRD p.25 · Revenue Split, Services vs Retail"
+      }
+    },
+    {
+      "id": "XR-8",
+      "what": "August rooms on the books",
+      "a": "overview.tables.booking_pace Aug (1520)",
+      "b": "signals.tables.booking_pace_month Day 30 (2198)",
+      "source": {
+        "a": "BRD p.12 · Booking Pace — On the Books",
+        "b": "BRD p.39 · Booking Pace & Pickup"
+      }
+    }
+  ],
+  "_source": "Every figure transcribed from FX1-Executive-Dashboard-BRD.pdf v1.0, 07 Aug 2026. Page references in cross_refs[].source — check them."
+}
