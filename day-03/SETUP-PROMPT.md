@@ -7,7 +7,7 @@ Work inside day-03. Own every file edit and every command in this task.
 
 ## 1. Discover the inputs
 
-1. Read `day-03/README.md`, `day-03/PARTICIPANT.md`, every file under
+1. Read `day-03/README.md`, `day-03/PARTICIPANT.md`, `day-03/EARS.md`, every file under
    `day-03/starter/`, and command help for every local tool.
 2. List `../day-02/modules/` in lexical order.
 3. Select the first directory that contains `CONFLICTS.md`, `FRAMING.md`,
@@ -44,12 +44,10 @@ Work inside day-03. Own every file edit and every command in this task.
 Use the skills.sh CLI. Run each command with project scope and save the exact
 output in `evidence/day-03/skills-install.txt`:
 
-    set -o pipefail
-
-    npx skills add https://github.com/anthropics/claude-plugins-official --skill claude-md-improver --agent claude-code --copy -y | tee evidence/day-03/skills-install.txt
-    npx skills add https://github.com/sickn33/antigravity-awesome-skills --skill architecture-decision-records --agent claude-code --copy -y | tee -a evidence/day-03/skills-install.txt
-    npx skills add https://github.com/davila7/claude-code-templates --skill requirements-clarity --agent claude-code --copy -y | tee -a evidence/day-03/skills-install.txt
-    npx skills add https://github.com/obra/superpowers --skill verification-before-completion --agent claude-code --copy -y | tee -a evidence/day-03/skills-install.txt
+    npx skills add https://github.com/anthropics/claude-plugins-official --skill claude-md-improver --agent claude-code --copy -y
+    npx skills add https://github.com/sickn33/antigravity-awesome-skills --skill architecture-decision-records --agent claude-code --copy -y
+    npx skills add https://github.com/davila7/claude-code-templates --skill requirements-clarity --agent claude-code --copy -y
+    npx skills add https://github.com/obra/superpowers --skill verification-before-completion --agent claude-code --copy -y
     npx skills list --json | tee evidence/day-03/skills-list.json
 
 1. Read each installed `SKILL.md`.

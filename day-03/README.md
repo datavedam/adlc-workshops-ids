@@ -75,6 +75,7 @@ and review result in `SKILLS.md` and `evidence/day-03/`.
 ## Public files
 
 - [Participant guide](PARTICIPANT.md)
+- [First EARS lesson](EARS.md)
 - [Autonomous setup prompt](SETUP-PROMPT.md)
 - [Starter files](starter/)
 - [Local tools](tools/)

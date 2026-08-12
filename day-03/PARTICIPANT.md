@@ -75,6 +75,10 @@ end-to-end check.
 
 ## Part 1 — make one behavior checkable
 
+Read [EARS.md](EARS.md) during the first teaching block. EARS means Easy
+Approach to Requirements Syntax. The lesson gives five patterns and one card
+with a condition, behavior, result, and check.
+
 Use the agent to rewrite one Day 2 criterion. The result has one condition,
 one behavior, one source locator, and one exact check.
 
