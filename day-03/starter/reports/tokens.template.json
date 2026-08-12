@@ -1,0 +1,29 @@
+{
+  "task_id": "fx1-module-task-01",
+  "token_source": "<provider usage meter or file>",
+  "rate_source": "<provider pricing page or account export>",
+  "currency": "USD",
+  "rates_per_million": {
+    "input": 0,
+    "cached_input": 0,
+    "output": 0
+  },
+  "full": {
+    "input_tokens": 0,
+    "cached_input_tokens": 0,
+    "output_tokens": 0,
+    "wall_clock_seconds": 0,
+    "review_rounds": 0,
+    "defects": 0,
+    "merged_changes": 0
+  },
+  "reduced": {
+    "input_tokens": 0,
+    "cached_input_tokens": 0,
+    "output_tokens": 0,
+    "wall_clock_seconds": 0,
+    "review_rounds": 0,
+    "defects": 0,
+    "merged_changes": 0
+  }
+}

@@ -1,252 +1,134 @@
-# Day 2 — what you are doing today
+# Day 2 — source to a reviewed project pack
 
-You take one module of a real business document, find the places where it
-disagrees with itself, decide each one, and build the harness that keeps those
-decisions in force. At the end, somebody else's agent runs your work with no
-help from you.
+Day 2 turns source files and command output into a project pack. Claude Code
+discovers the inputs, writes every artifact, installs the selected skills, runs
+the checks, and records evidence. Participants review the source and approve
+business decisions.
 
-**You write almost no product code today.** That is deliberate.
+## Outcomes
 
----
+The agent creates a module pack with:
 
-## Before you start — 5 minutes
+- `CLAUDE.md`;
+- `CONFLICTS.md`;
+- `FRAMING.md`;
+- `DATA-CONTRACT.md`;
+- `ARCHITECTURE.md`;
+- `SPEC.md`;
+- three ADRs;
+- `SKILLS.md`;
+- `EVIDENCE.md`;
+- command output under `evidence/`.
+
+## Autonomous working agreement
+
+The agent selects the first valid module directory. The agent uses `fnb` when
+the module area has no valid pack. The agent records the selection and every
+source path.
+
+The agent writes all project files. An absent source value becomes an `OPEN`
+item with an owner and a question. A source-backed result becomes `OBSERVED`
+or `DERIVED`. A business choice becomes `PROPOSED` and remains open until a
+named human approves it.
+
+## Start
+
+Run from the public repository root:
 
 ```bash
-git clone https://github.com/datavedam/adlc-workshops-ids.git
 cd adlc-workshops-ids/day-02
-python3 tools/conflict-scan.py            # must print a conflict report
+python3 tools/conflict-scan.py
+python3 tools/criteria-lint.py starter/FRAMING.md
+python3 tools/pack-check.py starter --project-file starter/CLAUDE.md
 ```
 
-If that prints a report, you are ready. You also need the **BRD** — the trainer
-gives you that file directly. It is confidential and it is not in this
-repository.
+Start the agent with [SETUP-PROMPT.md](SETUP-PROMPT.md). The agent creates the
+module pack and the evidence files.
 
-Prefer to let Claude Code do the setup for you? Paste the prompt in
-**[SETUP-PROMPT.md](SETUP-PROMPT.md)**. It does the plumbing and refuses the
-five things that are yours to do.
+## Day 2 flow
 
----
-
-## The four parts
-
-| Part | What you do | What proves it |
+| Part | Agent result | Human gate |
 |---|---|---|
-| 1 | Watch the demonstration | You wrote a prediction down |
-| 2 | Frame one module | Conflicts closed · 4 criteria pass the lint |
-| 3 | Build the harness | CLAUDE.md audited · skills chosen and justified |
-| 4 | Prove it | Another person's agent runs your pack |
+| 1 · Source and evidence | Source ledger and scan output | Review paths and locators |
+| 2 · Pack creation | Project files and three ADRs | Review every proposal and open question |
+| 3 · Skills and challenge | Installed skills and review records | Review hashes and skill output |
+| 4 · TG2 cold run | Fresh-agent output and reconciliation | Watch the run and sign evidence |
 
----
+## ADR recap and review
 
-## Part 2 — frame one module
+Open `starter/adr/001-title.md`. Point to these sections:
 
-Pick one module and copy the starter folder into it.
+1. `Context` records the source forces.
+2. `Decision` records the proposed action.
+3. `The case against` records the strongest competing option.
+4. `The agent's attack` records three failure reasons and test conditions.
+5. `Outcome` records the human response, revision, or open result.
 
-```bash
-cp -r starter modules/fnb          # or: overview front_office spa
-                                   # sales_catering finance signals materials
+Show these three starter ADR files:
+
+```text
+starter/adr/001-title.md
+starter/adr/002-title.md
+starter/adr/003-title.md
 ```
 
-### Task 1 — find the conflicts
+The agent fills all three records. The participant reviews the source and the
+attack output. The participant records business approval in `EVIDENCE.md`.
 
-```bash
-python3 tools/conflict-scan.py fnb
-```
+## Skills.sh workflow
 
-The tool does the arithmetic. It never tells you which number is right.
+The agent uses these project-scoped skills:
 
-It only knows three rules, so it finds fewer conflicts than your module holds.
-Then read every table yourself and ask four questions:
-
-1. **Does it add up?** Total the rows. Compare with the stated total.
-2. **Does it agree elsewhere?** Find the same figure in another module.
-3. **Does the maths follow?** Recompute every derived number from its parts.
-4. **Does the note match?** Read the commentary against the table above it.
-
-Question 2 finds the most. Contradictions live in the gaps between people.
-
-### Task 2 — decide every conflict
-
-Write them in `modules/<yours>/CONFLICTS.md`. There are two ways to close one:
-
-- **Correct it** — you can prove which number is right. Write the value **and
-  the arithmetic**. Without the arithmetic you have recorded an opinion.
-- **State the assumption** — you cannot prove it. Write the value you chose, why
-  you chose it, and the exact question the client must answer.
-
-There is no third way. Do not leave one open.
-
-> Do not edit `data/fx1-sample.json`. The data keeps its contradictions on
-> purpose — another person runs your pack against it in Part 4.
-
-### Task 3 — write four acceptance criteria
-
-Put them in `modules/<yours>/FRAMING.md`, then:
-
-```bash
-python3 tools/criteria-lint.py modules/fnb/FRAMING.md
-```
-
-Write one for the totals, one for a missing number, one for the export, and one
-for the words. The test for each: could somebody who knows nothing about hotels
-tell you pass or fail, without asking a question?
-
-The lint flags. It does not judge. A criterion can pass the lint and still be
-useless.
-
----
-
-## Part 3 — build the harness
-
-Three layers, then TG1 gets signed.
-
-### Guard-rails — what the agent is allowed to do
-
-```bash
-cp -r day-01/starter/.claude  <your repo>/
-# then RESTART your session — settings load at session start
-```
-
-**Read both files before you copy them.** You are installing something that can
-veto your commands. "I copied it from the workshop repo" is not a review.
-
-Then attack it on purpose. Pick one:
-
-- ask the agent to edit a file **outside the repository**
-- ask it to run a **denylisted command** against an external host
-- ask it to read a **protected secret path**
-
-Expect **denied, with no prompt**. If it asked you and you said no, that is not
-a block — that is you being careful, and you will not be careful every time.
-
-```bash
-day-01/tools/violation-test.sh     # 3 attempts → evidence/tg1-violation.txt
-```
-
-That evidence file is what TG1 is signed against. Not the config — anybody can
-have a config.
-
-### CLAUDE.md
-
-Five sections:
-
-| Section | What goes in it |
+| Work area | Skill |
 |---|---|
-| What this is | Two lines. The product, and who reads it. |
-| Commands | Build, test, run, check — the exact lines. |
-| Rules that do not bend | Constraints that make the build wrong if broken. |
-| Traps | Where this project has already caught somebody out. |
-| Conventions | Only what the code does not already show. |
+| `CLAUDE.md` review | `claude-md-improver` |
+| ADR review | `architecture-decision-records` |
+| Specification review | `requirements-clarity` |
+| Evidence review | `verification-before-completion` |
 
-Test every line with one question: **would this line have prevented a real bug
-we have already had?** If not, cut it. Aim for 60 lines. Never more than 200 —
-it is read on every task and costs tokens every time.
+The agent records source, command, local path, lock hash, installed files,
+review prompt, result, and status in `SKILLS.md` and `evidence/`.
 
-Then audit it:
+## Checks
 
 ```bash
-npx skills add anthropics/claude-plugins-official@claude-md-improver
+python3 tools/conflict-scan.py | tee evidence/conflict-scan.txt
+python3 tools/conflict-scan.py <module> | tee evidence/conflict-scan-<module>.txt
+python3 tools/criteria-lint.py modules/<module>/FRAMING.md | tee evidence/criteria-lint.txt
+python3 tools/pack-check.py modules/<module> --project-file CLAUDE.md | tee evidence/pack-check.txt
+git diff --check | tee evidence/diff-check.txt
 ```
 
-It scores your file and gives you a report **before** it changes anything. Read
-the report. Accept what is right. Reject what is wrong — it has never seen the
-conflicts you found this morning.
+The agent saves exact output. The participant reviews a failed result and the
+source boundary for each claim.
 
-### Skills
+## TG1 and TG2
 
-```bash
-npx skills find "requirements analysis"
-npx skills add <owner/repo@skill>
+The participant watches the Day 1 guard test. The agent saves the command and
+observed refusal in `evidence/tg1-violation.txt`.
+
+The agent starts a fresh session for the Day 2 TG2 task:
+
+```text
+Using only the project pack in this folder, build the Consolidated P&L card,
+write out/pl.json, run tools/reconcile.py, and record the command output.
 ```
 
-Choose at most three. Write one line for each: why this project needs it, and
-what it costs you if it is wrong. Then commit `skills-lock.json` — it is a
-dependency and it belongs in review.
+The agent saves the prompt, session, questions, output, and reconciliation
+result in `evidence/tg2-cold-run.txt`. The participant watches the run and
+records the observed result.
 
-**Read the actual SKILL.md before you install it.** The directory summary is
-marketing. The instructions are the product.
+## Sign-off
 
-Installing nothing is a defensible answer.
+The lead signs the commit after these records exist:
 
-### The check, before you break
+- source ledger with locators;
+- `CLAUDE.md` with rules, traps, commands, and review status;
+- checkable requirements in `SPEC.md`;
+- conflict results with `PROPOSED`, `APPROVED`, or `OPEN` status;
+- three ADRs with the five required sections and attack output;
+- `SKILLS.md` with lock hashes and review results;
+- `EVIDENCE.md` with watched commands and sign-off.
 
-```bash
-# restart your session first — config loads at session start
-```
-
-Then ask the agent: *"What are the rules for this project?"* and *"What will you
-refuse to do in this repository?"* If it cannot answer, your CLAUDE.md is
-decoration.
-
-### TG1 — signed at the end of Part 3
-
-A named IDS Next lead signs against a commit hash:
-
-- [ ] Guard-rails **refused a violation** — watched, no click-through, captured
-      in `evidence/tg1-violation.txt`
-- [ ] `CLAUDE.md` committed, and after a restart the agent states the project's
-      rules and what it will refuse to do
-- [ ] Skills **chosen and justified** in writing, `skills-lock.json` committed
-- [ ] A named IDS Next lead **has signed**
-
-> The **baseline** is not in TG1 — it is homework before the next session. It is
-> deferred, not dropped. Day 10 is measured against it.
-
----
-
-## Part 4 — the cold run and TG2
-
-Give your pack to the person on your right. Take the pack on your left.
-
-Open a **new session with no history**, then paste this task exactly. Do not add
-a word:
-
-```
-Using only the pack in this folder, build the Consolidated P&L card and write
-out/pl.json. Then run tools/reconcile.py and report the result.
-```
-
-```bash
-python3 tools/reconcile.py
-```
-
-Record every question the agent asks, and what was missing from the pack that
-caused it.
-
-**If you own the pack, say nothing.** No hints, no corrections, do not sit next
-to them. The moment you explain your pack out loud you are testing yourself.
-
-Section C of the check is **expected to fail** — the tiles and the P&L disagree
-in the source data. An agent that reports that honestly has passed.
-
-### TG2
-
-A named IDS Next lead signs against a commit hash:
-
-- [ ] A fresh agent ran one task from the pack with no extra prompting
-- [ ] CLAUDE.md exists, was audited, and the agent states its rules after a restart
-- [ ] Every acceptance criterion could be judged by a check
-- [ ] Every conflict is closed — corrected, or stated as an assumption
-
-Commit before the gate. We sign what is committed.
-
----
-
-## Before the next session
-
-1. Finish `CONFLICTS.md`. Every conflict closed, arithmetic beside each correction.
-2. Write **three decisions** (`starter/adr/`). Write your own case against each
-   one **before** you ask the agent to argue with you. If you ask first you will
-   adopt its framing and stop thinking.
-3. Finish `DATA-CONTRACT.md` for your module.
-4. Run the cold task on your own pack again. Fix what it asks about.
-5. **Your baseline.** One task, three ways — unassisted, then chat, then agentic.
-   Four numbers each: time, diff lines, defects found in review, tokens. Do the
-   unassisted run **first**, and commit your config before you start or it counts
-   as task diff. This is the number Day 10 is measured against.
-
----
-
-## One line before you go
-
-Every conflict you leave open, the agent decides for you.
+The agent writes the sign-off fields. The lead supplies the name, date,
+decision, scope, and commit hash.

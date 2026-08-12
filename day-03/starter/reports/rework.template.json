@@ -1,0 +1,26 @@
+{
+  "task_id": "fx1-module-task-01",
+  "spec_commit": "<commit-hash>",
+  "same_task": true,
+  "same_criteria": true,
+  "same_reviewer": true,
+  "operators": {
+    "without_knowledge_base": "<name>",
+    "with_knowledge_base": "<name>"
+  },
+  "without_knowledge_base": {
+    "session_id": "<session-id>",
+    "questions": 0,
+    "review_rounds": 0,
+    "defects": 0,
+    "changed_diff_lines": 0
+  },
+  "with_knowledge_base": {
+    "session_id": "<session-id>",
+    "questions": 0,
+    "review_rounds": 0,
+    "defects": 0,
+    "changed_diff_lines": 0
+  },
+  "limitation": "Record operator differences and any task change here."
+}

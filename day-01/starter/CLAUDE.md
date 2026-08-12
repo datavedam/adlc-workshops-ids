@@ -1,41 +1,48 @@
-# CLAUDE.md — <repo name>
+# CLAUDE.md — <agent fills the repository name>
 
-<!-- Keep this under 200 lines. Spend the lines on the traps, not on things
-     the agent can already see by reading the code. Delete every angle-bracket
-     placeholder before you commit it. -->
+<!-- Claude Code fills this file from the source, tests, and observed command
+output. A human reviews the result. Use the status words OBSERVED, DERIVED,
+PROPOSED, APPROVED, and OPEN. -->
+
+## Source inventory
+
+| Claim | Source path | Line or command | Status |
+|---|---|---|---|
+| <agent fills> | | | OBSERVED / DERIVED / PROPOSED / APPROVED / OPEN |
 
 ## What this repo is
-<One paragraph. What the service does, who uses it, what breaks if it's wrong.>
+
+<Agent writes the service, user, and result from source evidence.>
+
+**Source:** <path and line> · **Status:** PROPOSED
 
 ## Run it
+
+```bash
+<agent writes the exact test command>
+<agent writes the exact local run command>
 ```
-<install>
-<run tests — the exact command, and roughly how long it takes>
-<start locally>
-```
+
+**Source:** <command output path> · **Status:** OBSERVED
 
 ## The rules that are not negotiable
-<These are the ones that cost you a production incident. Be specific — an agent
- cannot act on "follow best practice".>
 
-- Every query that touches guest, reservation or folio data **must** filter by
-  `property_id`. A caller scoped to one property must never see another's data.
-- Money is decimal, never float. Rounding on a folio balance is a customer call.
-- Never log guest name, email, phone, document number or card data. Use the
-  house logger, not `print`.
-- A missing record is a 404, not a 500.
-- New endpoint → one integration test. New branch in logic → one unit test.
-- Config comes from the environment. No hostnames, keys or secrets in code.
+<Agent writes source-backed rules that affect correctness, privacy, or data
+scope.>
 
-## How we write things here
-- <language/framework conventions that differ from the obvious default>
-- <error handling pattern — point at one real file as the example>
-- <naming, module layout, where tests live>
+- <rule> · <source path and line> · OBSERVED / PROPOSED / APPROVED
+- <rule> · <source path and line> · OBSERVED / PROPOSED / APPROVED
 
-## Traps — the things that have already bitten us
-- <the legacy module that looks dead and isn't>
-- <the migration that must run before the tests pass>
-- <the endpoint whose auth works differently from every other one>
+## Traps — the things the source shows
 
-## Don't touch
-- <generated files, vendored code, anything with its own pipeline>
+<Agent writes observed failure cases, test expectations, and stale paths.>
+
+- <trap> · <source path or command output> · DERIVED / OPEN / APPROVED
+- <trap> · <source path or command output> · DERIVED / OPEN / APPROVED
+
+## Review
+
+- Skill review: `evidence/CLAUDE-review.md`
+- Reviewed by: <human name or OPEN>
+- Reviewed on: <date or OPEN>
+- Status: PROPOSED / APPROVED / OPEN

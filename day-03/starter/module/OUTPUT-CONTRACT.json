@@ -1,0 +1,16 @@
+{
+  "module_key": "<module-key>",
+  "input_file": "../day-02/data/fx1-sample.json",
+  "output_file": "modules/<module-key>/out/module-view.json",
+  "required_fields": [
+    "module_key",
+    "property_code",
+    "title",
+    "as_of_days",
+    "metrics",
+    "source_file"
+  ],
+  "metric_names": [
+    "<metric-name>"
+  ]
+}

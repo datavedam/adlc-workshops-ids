@@ -1,27 +1,49 @@
-# ADR-<n> — <the decision, as a statement>
+# ADR-001 — <agent writes the decision as a statement>
 
-**Status:** proposed / accepted / superseded · **Date:** ...
+**Status:** PROPOSED · **Date:** <agent records date>
+**Owner:** <agent records owner or OPEN>
+**Source set:** <agent records paths and locators>
 
 ## Context
-What forces this decision. Quote the BRD section if it drives it.
+
+<Agent records the forces from source files, command output, and approved
+scope. Every factual sentence has a path and locator.>
+
+**Evidence:** <OBSERVED or DERIVED source record>
 
 ## Decision
-One sentence. State what you will do.
+
+<Agent writes one proposed action. The agent records a business assumption as a
+proposal and gives it to the human for approval.>
+
+**Status:** PROPOSED
 
 ## The case against
-The strongest argument on the other side. If you cannot write this, you have
-not understood the choice yet.
+
+<Agent writes the strongest other view from source evidence and review input.>
+
+**Status:** PROPOSED · **Source:** <path, locator, or review record>
 
 ## The agent's attack
-Prompt used:
-> Here is my decision and my reasoning. Argue against it. Give me the three
-> strongest reasons this is wrong, and name the conditions under which it
-> fails. Do not agree with me.
 
-Its three strongest points:
-1.
-2.
-3.
+**Skill:** <source and skill name, or OPEN>
+**Prompt used:**
+
+> Here is the proposed decision and its source evidence. Argue against it.
+> Give the three strongest reasons it can fail. Name the evidence or condition
+> that would prove each reason. Mark each claim OBSERVED, DERIVED, PROPOSED, or
+> OPEN. Use the source files and command output only.
+
+**Output record:** `evidence/adr-001-attack.md`
+
+1. <agent records the strongest attack and source>
+2. <agent records the second attack and source>
+3. <agent records the third attack and source>
 
 ## Outcome
-Rebuttal, or what changed. One of the two. Silence is not an outcome.
+
+<Agent records the human response, the changed decision, or the open question.>
+
+**Status:** PROPOSED / APPROVED / OPEN
+**Approved by:** <human name or OPEN>
+**Approved on:** <date or OPEN>

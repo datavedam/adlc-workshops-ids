@@ -1,0 +1,10 @@
+{
+  "task_id": "fx1-module-task-01",
+  "spec_commit": "<commit-hash>",
+  "owner": "<module-owner>",
+  "runner": "<second-participant>",
+  "fresh_session": true,
+  "questions": [],
+  "defects": [],
+  "end_to_end_check": "<command and result>"
+}

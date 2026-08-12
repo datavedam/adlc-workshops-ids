@@ -1,18 +1,40 @@
-# DATA CONTRACT — <module name>
+# DATA CONTRACT — <agent writes the module name>
 
-Section 6 of the BRD asks for one clear shape, so a live FX Suite extract can
-replace the sample data. This is your module's part of that shape.
+The agent fills this file from observed source fields and source tables. The
+human reviews the field meaning and approves the contract.
+
+## Source set
+
+- Data file: <agent records path>
+- Source document: <agent records path or OPEN>
+- JSON paths or page locators: <agent records them>
+- Status: OBSERVED
 
 ## The rule
-Store what the hotel measured. Compute everything derived from it.
-Never store a derived number.
+
+Store measured values as base fields. Compute derived values from base fields.
+Record a source gap as OPEN.
 
 ## Fields this module reads
-| Field | Kind | Unit | Source | Derived from |
-|---|---|---|---|---|
-| | base / derived | | | |
 
-## What this module computes, and how
-| Output | Formula |
-|---|---|
-| | |
+| Field | Kind | Unit | Source path or locator | Status |
+|---|---|---|---|---|
+| <agent fills> | base / derived | <unit> | <path and locator> | OBSERVED / DERIVED / OPEN |
+
+## Outputs and formulas
+
+| Output | Formula | Input fields | Check command | Status |
+|---|---|---|---|---|
+| <agent fills> | <agent writes formula> | <agent lists fields> | <agent writes command> | DERIVED / PROPOSED / APPROVED |
+
+## Unknowns
+
+| Question | Source gap | Owner | Status |
+|---|---|---|---|
+| <agent fills> | <path or locator> | <name or OPEN> | OPEN |
+
+## Human review
+
+- Reviewed by: <human name or OPEN>
+- Reviewed on: <date or OPEN>
+- Decision: APPROVED / OPEN

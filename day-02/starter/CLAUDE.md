@@ -1,65 +1,61 @@
-# CLAUDE.md — FX1 Executive Command Center
+# CLAUDE.md — <agent fills the project name from source>
 
-<!-- Part 3. You write this one. Keep it under 200 lines — aim for 60.
-     Every line is read on every task and costs tokens every time.
+<!--
+Claude Code fills this file from source files, local commands, and observed
+output. A human reviews the result. The agent keeps this file under 200 lines.
+The agent keeps the module copy aligned with the project copy.
+Use a status on every statement: OBSERVED, DERIVED, PROPOSED, APPROVED, OPEN.
+-->
 
-     Test each line with one question:
-         would this line have prevented a real bug we have already had?
-     If not, cut it.
+## Source inventory
 
-     Delete every angle-bracket placeholder before you commit. -->
+| Claim | Source path | Page, line, or JSON path | Status |
+|---|---|---|---|
+| <agent records one source claim> | | | OBSERVED / DERIVED / PROPOSED / APPROVED / OPEN |
 
-## What this is
+## What this project is
 
-<Two lines. What the product is, and who reads it. Not what it is built with —
- the agent can see that. Who reads it changes what "good" means.>
+<Agent summary from the source. Name the user, output, and business purpose.>
+
+**Status:** PROPOSED · **Source:** <path and locator>
 
 ## Commands
 
-<The exact lines. Not a description of them. If you leave these out the agent
- guesses, and the first guess is wrong in every session from now on.>
-
-```
-<how you open it>
-<how you run the checks>
+```bash
+<agent writes the exact command to inspect the source>
+<agent writes the exact command to run the checks>
 python3 tools/reconcile.py
 ```
 
+**Status:** OBSERVED · **Source:** <command output path>
+
 ## Rules that do not bend
 
-<Constraints where breaking one makes the build wrong, not untidy. Be specific.
- An agent cannot act on "follow best practice".
+<Agent writes rules that affect the result. Each rule has a source locator.>
 
- You already know several of these. Some come from the document's own
- constraints. At least two come from what you found this morning — think about
- what would have to be true for those fourteen conflicts to be impossible to
- express rather than merely caught later.>
-
-- ...
-- ...
-- ...
+- <rule> · <source path and locator> · OBSERVED / PROPOSED / APPROVED
+- <rule> · <source path and locator> · OBSERVED / PROPOSED / APPROVED
 
 ## Traps
 
-<Where this project has already caught somebody out. The agent cannot read your
- git history, sit in your retro, or remember this morning. Left alone it will
- cheerfully walk back into it.
+<Agent writes source contradictions, data gaps, and check behavior.>
 
- Start with this question: if a fresh session opened the BRD tomorrow and
- believed it, what would it undo?>
+- <trap> · <source path or command output> · DERIVED / OPEN / APPROVED
+- <trap> · <source path or command output> · DERIVED / OPEN / APPROVED
 
-- ...
-- ...
+## Update protocol
 
-## Conventions
+Claude Code reads the source files before each update. Claude Code runs the
+affected local checks after each update. Claude Code records the output in
+`evidence/`. Claude Code shows the human the changed lines.
 
-<Only what the code does not already show. If the agent can work it out by
- opening two files, do not spend a line on it here.>
+## Human review
 
-- ...
+- Reviewed files: <agent lists files>
+- Open questions: <agent lists owners and questions>
+- Approved by: <human name or OPEN>
+- Approved on: <date or OPEN>
+- Commit: <hash or OPEN>
 
-<!-- Check it before you commit:
-       1. restart your session — config loads at session start
-       2. ask: "What are the rules for this project?"
-       3. ask: "What will you refuse to do in this repository?"
-     If it cannot answer, this file is decoration. -->
+The agent writes this file. The human changes the review fields by approving
+the agent's recorded proposal in the working session.

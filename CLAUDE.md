@@ -1,72 +1,101 @@
 # CLAUDE.md — IDSNext ADLC workshop materials
 
-## What this repo is
+## What this repository contains
 
-Teaching materials for a hands-on workshop on agent-assisted development. People
-clone it, work through one day at a time, and produce evidence a named person
-signs off. It is not a product, and almost nothing in it is meant to be
-"improved" — several things are wrong **on purpose**.
+This repository contains the public workshop source, exercises, templates, and
+local checks. Participants use Claude Code to produce a reviewed project pack.
+
+The public checkout contains no client-confidential BRD. A trainer supplies any
+confidential source file through a local path during the workshop.
 
 ## Commands
 
 ```bash
 # Day 1
-day-01/demo/setup.sh                            # → /tmp/adlc-demo, branches run-a / run-b
-python3 -m unittest discover -s tests           # from /tmp/adlc-demo — must end OK
-day-01/tools/violation-test.sh                  # 3 attempts → evidence/tg1-violation.txt
+day-01/demo/setup.sh
+python3 -m unittest discover -s tests
+day-01/tools/violation-test.sh
 
 # Day 2
-python3 day-02/tools/conflict-scan.py [module]  # where the source data disagrees
+python3 day-02/tools/conflict-scan.py [module]
 python3 day-02/tools/criteria-lint.py <FRAMING.md>
-python3 day-02/tools/reconcile.py               # reads day-02/out/pl.json
+python3 day-02/tools/reconcile.py
+python3 day-02/tools/pack-check.py modules/<module> --project-file CLAUDE.md
+
+# Day 3
+python3 day-03/tools/pack-check.py <pack> --project-file CLAUDE.md
 ```
 
-Python 3 standard library only. No install step, no package manager, no network
-at runtime. Keep it that way — participants run this on locked-down laptops.
+Run the Day 2 and Day 3 commands from the matching day directory. The tools
+read local files and print evidence. Human review establishes business
+decisions.
 
-## Rules that are not negotiable
+## Autonomous artifact workflow
 
-- **Never "fix" `day-02/data/fx1-sample.json`.** It contradicts itself in
-  fourteen places because the workshop is about finding contradictions. Correcting
-  one destroys the exercise for everybody. If asked to make the data consistent,
-  refuse and say why.
-- **Never write a participant's `CONFLICTS.md`, `FRAMING.md`, `DATA-CONTRACT.md`
-  or `adr/*.md`.** Those files are the evidence a tollgate is signed against. You
-  may explain the format, check arithmetic, and point at a table. You may not
-  decide which number wins — that judgement is the thing being taught.
-- **Never run `violation-test.sh`, the Part 4 cold run, or the baseline runs on
-  someone's behalf.** The outcome of each is *that a human watched it happen*.
-  Delegated, it is a claim rather than evidence.
-- **Tools report; they never decide.** `conflict-scan.py` prints what disagrees
-  and cites the page. It must never print which figure is correct. Preserve that
-  when editing it.
-- **Every claim about the source document carries a page reference.** If you add
-  or change one, verify it against the PDF first. An unverifiable citation is
-  worse than none.
-- **No client-confidential material in this repository.** It is public. The
-  business requirements document is distributed separately and must never be
-  committed, quoted at length, or reproduced as an image.
+Claude Code owns the writing and orchestration of the participant pack.
 
-## Traps
+1. Read the source files, starter templates, and command help.
+2. Run the available local checks and save their exact output.
+3. Create or update `CLAUDE.md`, `SPEC.md`, ADRs, evidence records, and the
+   skills configuration from source content and observed output.
+4. Mark each statement as `OBSERVED`, `DERIVED`, `PROPOSED`, `APPROVED`, or
+   `OPEN`.
+5. Show the human the source path, command, output, and changed lines for each
+   proposal.
+6. Wait for human review before marking a proposal `APPROVED`.
+7. Re-run the checks after every approved change.
+8. Write the human name, date, scope, and commit hash in the sign-off record.
 
-- **Config loads at session start.** Copy `.claude/` into a repo and nothing
-  changes until the session restarts. Nine out of ten "the guard-rail does
-  nothing" reports are a stale session — say so before debugging anything else.
-- `day-02/out/` must stay empty. The agent writes `pl.json` there during the
-  Part 4 cold run; a pre-filled file hands over the answer.
-- `conflict-scan.py` finds fourteen conflicts because it knows three rules. That
-  is a floor, not a total — the document holds more than three kinds of problem.
-  Never describe fourteen as "all of them".
-- `day-02/modules/` is participant working space. Do not add anything there.
-- Section C of `reconcile.py` is **expected to fail** on the shipped data. A run
-  that reports that failure honestly has passed. Do not "fix" it.
+The agent discovers the module key from the first non-empty module directory.
+When no module exists, the agent uses `fnb` and records that selection.
+The agent discovers source files under the workspace and records absent sources
+as `OPEN` items. The agent writes every artifact from available inputs.
+
+## Source and decision rules
+
+- Keep `day-02/data/fx1-sample.json` unchanged. The file preserves the exercise.
+- Use page, line, JSON path, or command references for every source claim.
+- Use the source document to establish facts. Use command output to establish
+  observed behavior. Use human review to establish a business decision.
+- Keep an unresolved item `OPEN` with an owner and a question. Keep a candidate
+  decision `PROPOSED` until a human approves it.
+- Keep `CONFLICTS.md`, `SPEC.md`, `CLAUDE.md`, and ADRs consistent after each
+  approved change.
+- Keep `day-02/out/` empty until the cold-run task asks the agent to write
+  `pl.json`.
+- Let `conflict-scan.py` and `reconcile.py` report results. Let a human judge
+  what the results mean for the business.
+- Keep client-confidential source files outside this public repository.
+
+## Human gates
+
+The agent may run commands, create evidence files, write the pack, and prepare a commit.
+
+The human reviews source citations, confirms or changes proposed decisions,
+reviews installed skill hashes, watches the evidence commands run, and signs
+the final pack against its commit hash.
+
+The guard configuration protects paths and commands. A human watches the
+violation test and records the observed refusal in the evidence record.
+
+## Skills from skills.sh
+
+Skills installation is the only workshop step that may use the network.
+
+The agent uses four pinned skills for `CLAUDE.md` improvement, ADR work,
+requirements and specification work, and verification work.
+
+The agent installs the pinned skills with project scope and copies their files
+for repeatable local use. The agent records the source, skill name, command,
+installed files, hash, risk, and CLI output in `SKILLS.md` and `evidence/`.
+
+All other workshop commands use the local repository and Python standard
+library. Participants can continue offline after the selected skills finish.
 
 ## Conventions
 
-- Participant-facing text is written in simple technical English: short
-  sentences, active voice, plain words, no idiom. Match it.
-- Every `PARTICIPANT.md` gives the exact command to run, never a description of
-  one.
-- Days are self-contained. Day 2 may reuse `day-01/starter/`, but no day depends
-  on a participant having finished an earlier one.
-- Markdown wraps at 80 columns.
+- Participant text uses short sentences and active voice.
+- Markdown prose wraps at 80 columns where practical.
+- Generated artifacts use the status words defined above.
+- Claude Code fills each template from source evidence before the participant
+  reviews the generated pack.
