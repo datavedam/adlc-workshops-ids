@@ -56,8 +56,10 @@ Start Claude Code with [SETUP-PROMPT.md](SETUP-PROMPT.md).
 
 ## Part 1 — the loop
 
-Give the agent one requirement and nothing else. Keep it small. Record every
-stop as a decision or a lookup:
+Give the agent one requirement and nothing else. Keep it small. If you have
+nothing of your own, use [starter/SAMPLE-REQUIREMENT.md](starter/SAMPLE-REQUIREMENT.md).
+
+Record every stop as a decision or a lookup:
 
 ```bash
 python3 tools/decision-log.py add --kind decision --stage 3 \

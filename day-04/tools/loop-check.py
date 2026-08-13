@@ -145,7 +145,14 @@ def check_guard(root, rep):
         rep.add("4 guard record", False, f"absent: {path}")
         return
     text = open(path, encoding="utf-8").read()
-    blocks = len(re.findall(r"\bexit(?:\s+code)?\s*2\b", text, re.I))
+    # Count refusal LINES, not every mention of "exit 2". A summary line such as
+    # "result: 2 refusals with exit 2" is prose about the run, not a third
+    # refusal — counting occurrences reported 3 blocks for a 2-block capture.
+    # A refusal line has to carry a block marker as well as the exit code.
+    blocked = re.compile(r"\bBLOCKED\b|\brefus(?:ed|al)\b|\bdenied\b", re.I)
+    exit2 = re.compile(r"\bexit(?:\s+code)?\s*2\b", re.I)
+    blocks = sum(1 for ln in text.splitlines() if blocked.search(ln) and exit2.search(ln)
+                 and not ln.lstrip().lower().startswith(("result", "summary", "total")))
     allowed = re.search(r"\ballow(?:ed)?\b|\bsucceed(?:ed|s)?\b", text, re.I)
     if blocks < 2:
         rep.add("4 guard record", False,
@@ -158,13 +165,50 @@ def check_guard(root, rep):
                 f"{blocks} refusal(s) with exit 2 and one allowed write · {path}")
 
 
+GUARD_CASES = [
+    # (capture text, expected block count, expected OK)
+    ("1 -> exit 2 : BLOCKED boundary\n2 -> exit 2 : BLOCKED credential\n3 -> allowed\n"
+     "result: 2 refusals with exit 2, 1 allowed write\n", 2, True),
+    ("1 -> exit 2 : BLOCKED boundary\n3 -> allowed\n", 1, False),
+    ("1 -> exit 2 : BLOCKED boundary\n2 -> exit 2 : BLOCKED credential\n", 2, False),
+]
+
+
+def self_test():
+    """Cover the guard counter. A prose summary is not a third refusal."""
+    import tempfile
+    for text, want_blocks, want_ok in GUARD_CASES:
+        with tempfile.TemporaryDirectory() as d:
+            os.makedirs(os.path.join(d, "evidence", "day-04"))
+            with open(os.path.join(d, "evidence", "day-04", "guard.txt"), "w",
+                      encoding="utf-8") as f:
+                f.write(text)
+            rep = Report()
+            check_guard(d, rep)
+            _, ok, detail = rep.rows[0]
+            assert ok is want_ok, f"expected ok={want_ok} for {text!r}, got {detail}"
+            # The no-allowed-write message reports no count, so check when present.
+            m = re.search(r"(\d+) refusal", detail)
+            if m:
+                assert int(m.group(1)) == want_blocks, \
+                    f"expected {want_blocks} blocks, counted {m.group(1)} — {detail}"
+    print("self-test PASS")
+    print("  a 2-refusal capture with a prose summary counts 2, not 3")
+    print("  a 1-refusal capture is refused")
+    print("  a capture with no allowed write is refused")
+    return 0
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--root", default=".", help="the folder that holds evidence/")
     ap.add_argument("--file", default="tracker.xlsx", help="the tracker workbook")
     ap.add_argument("--module", default="", help="named in the output only")
+    ap.add_argument("--self-test", action="store_true")
     a = ap.parse_args()
+    if a.self_test:
+        return self_test()
 
     print(f"Day 4 loop check · root {os.path.abspath(a.root)}"
           + (f" · module {a.module}" if a.module else ""))
