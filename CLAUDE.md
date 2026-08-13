@@ -24,6 +24,12 @@ python3 day-02/tools/pack-check.py modules/<module> --project-file CLAUDE.md
 
 # Day 3
 python3 day-03/tools/pack-check.py <pack> --project-file CLAUDE.md
+
+# Day 4
+python3 day-04/tools/make-tracker.py --out tracker.xlsx
+python3 day-04/tools/tracker.py show|propose|gate|check --file tracker.xlsx
+python3 day-04/tools/decision-log.py add|list|report
+python3 day-04/tools/loop-check.py --file tracker.xlsx
 ```
 
 Run the Day 2 and Day 3 commands from the matching day directory. The tools
@@ -50,6 +56,31 @@ The agent discovers the module key from the first non-empty module directory.
 When no module exists, the agent uses `fnb` and records that selection.
 The agent discovers source files under the workspace and records absent sources
 as `OPEN` items. The agent writes every artifact from available inputs.
+
+## The Day 4 delivery loop
+
+Run eight stages in order for any new requirement: understand, context, grill,
+decide, specify, plan, build, prove.
+
+Stop for a choice. Never stop for a fact. A fact lives in the source, in a
+file, or in command output, so find it. A choice needs authority over money,
+scope, risk, or a promise to a customer, so ask one question.
+
+Record every stop with `day-04/tools/decision-log.py`. A stop marked `lookup`
+is a gap in the project file. Put the answer there before you continue.
+
+## The tracker write contract
+
+The agent may write columns A to P on a task row it created, write columns AF
+to AP on its own rows, and append a row to the `ADRs`, `Risks` and `Gates`
+sheets.
+
+The agent may never write columns Q to AE, never write the `Team`,
+`Availability`, `Utilization` or `Timeline` sheets, never write a tollgate
+signature or date, and never open a workbook file with a direct file write.
+Use `day-04/tools/tracker.py`.
+
+A task reaches `Completed` only when column AO names the check that proves it.
 
 ## Source and decision rules
 

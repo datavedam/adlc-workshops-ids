@@ -55,6 +55,24 @@ Read [day-03/PARTICIPANT.md](day-03/PARTICIPANT.md) and use
 pack as its source and makes the agent maintain the pack through evidence,
 skills, review, and sign-off.
 
+## Day 4 — one loop from requirement to evidence
+
+```bash
+cd day-04
+python3 -m pip install --user openpyxl
+python3 tools/make-tracker.py --out tracker.xlsx
+python3 tools/loop-check.py --file tracker.xlsx
+```
+
+Read [day-04/PARTICIPANT.md](day-04/PARTICIPANT.md) and use
+[day-04/SETUP-PROMPT.md](day-04/SETUP-PROMPT.md). Day 4 joins the first three
+sessions into one loop of eight stages. The agent stops only when a human has
+to choose. The task tracker keeps the record, and a `PreToolUse` guard holds
+the boundary.
+
+Print [day-04/starter/loop-card.md](day-04/starter/loop-card.md) before the
+session.
+
 ## Repository map
 
 ```text
@@ -76,6 +94,12 @@ day-03/
   PARTICIPANT.md       autonomous maintenance workflow
   SETUP-PROMPT.md      autonomous maintenance prompt
   starter/             source and review contract
+
+day-04/
+  PARTICIPANT.md       the eight-stage loop, part by part
+  SETUP-PROMPT.md      autonomous prompt that runs every stage
+  starter/             loop card, CLAUDE.md block, guard and settings
+  tools/               tracker, decision log, and loop check
 ```
 
 ## Network boundary
